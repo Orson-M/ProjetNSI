@@ -5,7 +5,7 @@ player_y = 0
 wallside = False
 grounded = True 
 climbing = False
-
+# pget(x, y) to get the status
 def player_deplacement(player_x, player_y):
     """déplacement avec les touches de directions"""
 
@@ -21,9 +21,9 @@ def player_deplacement(player_x, player_y):
     #if pyxel.btn(pyxel.KEY_UP):
       #  if (player_y > 0) :
           #  player_y = player_y - 1
-    if pyxel.btn(pyxel.SPACE):
-        if (player_y < 320-16):
-            player_y = player_y + 8
+    #if pyxel.btn(pyxel.KEY_SPACE):
+       # if (player_y < 320-16):
+            #player_y = player_y + 8
     return player_x, player_y
 
 def climb(wallside, climbing, player_y):
@@ -41,7 +41,9 @@ def gravity(player_x, player_y, grounded, climbing):
     return player_x, player_y
 
 def touch_ground(player_x, player_y, grounded):
-    return
+    if pget(player_x, player_y + 1) = 0
+        grounded = False 
+    return grounded
 
 
 def update():
@@ -49,7 +51,9 @@ def update():
 
 def draw():
     pyxel.cls(1)
+    pyxel.rect(player_x,player_y,4,8,2)
 
 
 pyxel.run(update,draw)
+
 
