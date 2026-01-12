@@ -1,10 +1,11 @@
 import pyxel
-pyxel.init(100, 100, title="undef")
+pyxel.init(320, 184, title="JeuNSI")
 
 def update():
     pass
 
 def draw():
     pyxel.cls(1)
+
 
 pyxel.run(update,draw)
