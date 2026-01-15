@@ -28,33 +28,33 @@ def player_deplacement(player_x, player_y):
     return player_x, player_y
 
 def climb(wallside, climbing, player_y):
-    if wallside = True and pyxel.btn(pyxel.KEY_UP) = True:
+    if wallside == True and pyxel.btn(pyxel.KEY_UP) == True:
         player_y = player_y + 1
         climbing = True
-    else 
+    else:
         climbing = False
     return climbing, player_y
         
 def jump(player_x, player_y, grounded, climbing):
-    if grounded = False and climbing = False :
+    if grounded == False and climbing == False :
             player_y = player_y - 1
     return player_x, player_y
 
 def touch_ground(player_x, player_y, grounded):
-    if pget(player_x, player_y + 1) = 0
+    if pget(player_x, player_y + 1) == 0:
         grounded = False 
     return grounded
 
 
 def update():
     global player_x, player_y, vy
-    if pyxel.btnp(pyxel.KEY_SPACE)
+    if pyxel.btnp(pyxel.KEY_SPACE):
         vy = -5
     vy += 1
-    y += vy
-    if y > 100
+    player_y += vy
+    if player_y > 100:
         vy = 0
-    y=100
+        player_y=100
 
 def draw():
     pyxel.cls(1)
@@ -62,6 +62,3 @@ def draw():
 
 
 pyxel.run(update,draw)
-
-
-
