@@ -16,24 +16,15 @@ def player_deplacement(x):
     if pyxel.btn(pyxel.KEY_Q) == True:
         if x > 0 :
             x = x - 2
-   # if pyxel.btn(pyxel.KEY_DOWN):
-    #    if (player_y < 184) :
-     #       player_y = player_y + 1
-    #if pyxel.btn(pyxel.KEY_UP):
-      #  if (player_y > 0) :
-          #  player_y = player_y - 1
-    #if pyxel.btn(pyxel.KEY_SPACE):
-       # if (player_y < 320-16):
-            #player_y = player_y + 8
     return x
 
-def climb(wallside, climbing, player_y):
+"""def climb(wallside, climbing, player_y):
     if wallside == True and pyxel.btn(pyxel.KEY_UP) == True:
         player_y = player_y + 1
         climbing = True
     else:
         climbing = False
-    return climbing, player_y
+    return climbing, player_y"""
         
 def jump(player_x, player_y, grounded, climbing):
     if grounded == False and climbing == False :
@@ -43,16 +34,18 @@ def jump(player_x, player_y, grounded, climbing):
 def touch_ground(player_x, player_y, grounded):
     if pget(player_x, player_y + 1) == 0:
         grounded = False 
+    else:
+        grounded = True
     return grounded
 
 
 def update():
-    global x,y,player_x,player_y,vy
-    if pyxel.btnp(pyxel.KEY_Z) :
+    global x,y,player_x,player_y,vy, grounded
+    if pyxel.btnp(pyxel.KEY_Z) and grounded == True:
         vy = -5
     vy += 1
     player_y += vy
-    if player_y > 101:
+    if grounded == True:
         vy = 0
         player_y=101
 
