@@ -1,11 +1,12 @@
 import pyxel
 pyxel.init(320, 184, title="JeuNSI")
-player_x = 30
-player_y = 0
+x = 30
+y = 0
 wallside = False
 grounded = True 
 climbing = False
 vy = 0
+
 # pget(x, y) to get the status
 def player_deplacement(x):
     """déplacement avec les touches de directions"""
@@ -25,35 +26,31 @@ def player_deplacement(x):
     else:
         climbing = False
     return climbing, player_y"""
-        
-def jump(player_x, player_y, grounded, climbing):
-    if grounded == False and climbing == False :
-            player_y = player_y - 1
-    return player_x, player_y
 
-def touch_ground(player_x, player_y, grounded):
-    if pget(player_x, player_y + 1) == 0:
-        grounded = False 
+def touch_ground(player_x, player_y,g):
+    if pyxel.pget(x, y + 1) == 0:
+        g = False 
     else:
-        grounded = True
-    return grounded
-
-
+        g = True
+    return g
+    grounded = touch_ground(g)
+    
 def update():
     global x,y,player_x,player_y,vy, grounded
     if pyxel.btnp(pyxel.KEY_Z) and grounded == True:
-        vy = -5
+        vy = -10
     vy += 1
-    player_y += vy
+    y += vy
     if grounded == True:
         vy = 0
-        player_y=101
+        
 
-    player_x = player_deplacement(player_x)
+    player_x = player_deplacement(x)
     
 def draw():
-    pyxel.cls(1)
-    pyxel.rect(player_x,player_y,6,12,2)
+        pyxel.cls(0)
+        pyxel.rect(0,180,321,4,4)
+        pyxel.rect(player_x,y,6,12,2)
 
 
 pyxel.run(update,draw)
