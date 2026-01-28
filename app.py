@@ -1,5 +1,6 @@
 import pyxel
 pyxel.init(320, 184, title="JeuNSI")
+pyxel.load("my_resource.pyxres")
 x = 20
 y = 0
 wallside = False
@@ -9,9 +10,8 @@ vy = 0
 # pget(x, y) to get the status
 
 def update():
-    global x,y,vy, grounded
-    print(pyxel.pget(x,y+13))
-    print(vy)
+    global x,y,vy
+    print(x,y)
 
     if pyxel.btn(pyxel.KEY_D) == True and pyxel.pget(x+7, y+10) == 0:
         if x < 320   :
@@ -20,21 +20,25 @@ def update():
         if x > 0 and pyxel.pget(x-1,y) == 0 :
             x = x - 2       
     if pyxel.pget(x,y+13) == 0:
-        vy += 1
+        vy += 0.5
     if pyxel.pget(x,y+13) != 0:
         vy = 0
-    if pyxel.btnp(pyxel.KEY_Z) and pyxel.pget(x,y+13) != 0:
-        y = y - 10
+    if pyxel.btnp(pyxel.KEY_SPACE) and pyxel.pget(x,y+13) != 0:
+        y = y - 12
+    
+    if y > 320:
+        vy = 0
+        x = 0 
+        y = 20
     
     y += vy
-    
+
     
 def draw():
+    global x,y
     pyxel.cls(0)
-    # pyxel.load()
+    pyxel.bltm(0, 0, 0, 0, 0, 320, 184)
     pyxel.rect(x,y,6,12,2)
-    pyxel.rect(0,100,160,150,6)
-    pyxel.rect(0,150,320,184,6)
 
 
 pyxel.run(update,draw)
