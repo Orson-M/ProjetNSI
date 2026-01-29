@@ -37,8 +37,9 @@ def update():
 def draw():
     global x,y
     pyxel.cls(0)
-    pyxel.bltm(0, 0, 0, 0, 0, 320, 184)
     pyxel.rect(x,y,6,12,2)
+    pyxel.bltm(0, 0, 0, 0, 0, 320, 184)
+
 
 
 pyxel.run(update,draw)
