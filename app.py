@@ -19,13 +19,14 @@ def update():
             x = x + 2
     if pyxel.btn(pyxel.KEY_Q) == True and pyxel.pget(x-1, y+10) == 0:
         if x > 0 and pyxel.pget(x-1,y) == 0 :
-            x = x - 2       
+            x = x - 2    
+
     if pyxel.pget(x,y+13) == 0:
         vy += 0.5
     if pyxel.pget(x,y+13) != 0:
         vy = 0
 
-    if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.KEY_SPACE) and pyxel.pget(x,y+13) != 0:
+    if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.KEY_Z) and pyxel.pget(x,y+13) != 0:
         alt_init = y
         if y - alt_init < 20 and pyxel.pget(x,y+13) != 0:
             vy = -5
@@ -36,15 +37,12 @@ def update():
         x = 0 
         y = 20
     
-    """if pyxel.btnp(pyxel.KEY_E or pyxel.KEY_A) and pyxel.pget(x+7,y-12 or x-1,y-12) != 0:
+    if pyxel.btnp(pyxel.KEY_R) == True and pyxel.pget(x+7,y-12 or x-1,y-12) != 0:
         climbing = True
     else:
         climbing = False
 
-    if climbing == True:
-        y -= 2
-    if climbing == False:
-        y = 0"""
+
     
 
     y += vy
