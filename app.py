@@ -58,7 +58,8 @@ def spikes_dat(x,y):
     tiles = []
     if level == 1:
         tiles = [(3,5), (3,6), (3,7), (3,8), (3,9), (3,10), (3,11), (3,12), (3,13), (3,14), (3,15), (3,16), (3,17), (3,18),(3,19), (3,20), (3,21), (3,22), (3,23), (8,5), (8,6), (8,7), (8,8), (8,9), (8,10), (8,11), (8,12), (8,13), (8,14), (8,15), (9,4), (10,4), (11,4), (18,14), (18,15), (18,16), (18,17), (18,18), (18,19), (19,13), (20,13), (21,13), (23,13), (23,3), (23,4), (23,5), (23,6), (25,0), (25,1), (25,2), (25,3), (25,4), (25,5), (25,6), (30,9), (30,10), (30,11), (30,12), (30,13), (30,14), (30,15), (30,16), (30,17), (30,18), (30,19), (30,20)]
-    
+    if level == 2:
+        tiles = [(9,23),(9,22),(9,21),(9,20), (10,20), (11,20), (12,20), (13,20), (14,21), (14,22), (14,23), (14,24), (14,25), (14,26), (20,4), (20,5), (20,6), (20,7), (20,8), (20,9), (20,10), (20,11), (20,12), (20,13), (20,14), (20,15), (17,19), (17,20), (17,21), (17,22), (17,23), (24,15), (24,14), (24,13), (24,12), (24,11), (24,10), (24,9), (24,8), (24,7), (24,6), (24,5), (24,4), (27,12), (27,13), (27,20), (27,21), (27,22), (27,23)]
     # helper converting a pixel coordinate to tile coordinate
     def to_tile(px, py):
         return px // 8, py // 8
@@ -87,22 +88,24 @@ def spikes_dat(x,y):
     return False
         
 def death_lol():
+    global x,y,level,dead,vy
     if dead == True:
-        x = 0
-        y = 20
-        return x,y
+        vy = 0
+        if level == 1:
+            x = 20
+            y = 16
+            dead = False
+        if level == 2:
+            x = 20
+            y = 135
+            dead = False
 
 def update():
     global x,y,vy,alt_init,wallside,climbing,rhitbox,lhitbox,uhitbox,dhitbox, level, dead, invulnerability_timer
     
     # Check for death and reset position
-    if dead == True:
-        x = 0
-        y = 20
-        dead = False
-        invulnerability_timer = 30  # 30 frames of invulnerability
+    death_lol()
     
-    # Decrease invulnerability timer
     if invulnerability_timer > 0:
         invulnerability_timer -= 1
     
@@ -110,6 +113,8 @@ def update():
     # Only check spikes if not invulnerable
     if invulnerability_timer == 0:
         spikes_dat(x, y)
+    
+    level_change()
 
 
     if pyxel.btn(pyxel.KEY_D) == True and pyxel.pget(x+7, y+10) == 0 and rhitbox == False:
@@ -132,20 +137,13 @@ def update():
     if vy < 0 and (y - alt_init >= 20 or uhitbox):
         vy = 0
 
-    if y > 320:
-        vy = 0
-        x = 0 
-        y = 20
+    if y > 184:
+        dead = True
     
     if pyxel.btnp(pyxel.KEY_R) == True and pyxel.pget(x+7,y-12 or x-1,y-12) != 0:
         climbing = True
     else:
         climbing = False
-
-
-
-
-
 
 
     y += vy
@@ -161,13 +159,15 @@ def update():
 
 def levels():
     if level == 1:
-        pyxel.bltm(0, 0, 0, 0, 0, 320, 184, 0)
+        return pyxel.bltm(0, 0, 0, 0, 0, 320, 184, 0)
     if level == 2:
-        pyxel.bltm(0, 0, 0, 0, 184, 320, 184, 0)
+        return pyxel.bltm(0, 0, 0, 384, 0, 320, 184, 0)
+    
+
 
 def level_change():
     global level
-    if x > 310 and y > 170:
+    if level == 1 and x > 310 and y > 170:
         level = 2
     
 def draw():
