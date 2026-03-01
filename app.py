@@ -11,185 +11,127 @@ rhitbox = False
 lhitbox = False
 uhitbox = False
 dhitbox = False
+dead = False
+level = 1
+invulnerability_timer = 0  # Frames of invulnerability after respawn
 
 # pget(x, y) to get the status
 
 def hitbox (x,y):
     global rhitbox, lhitbox, uhitbox, dhitbox
-    # up 1
-    if pyxel.pget(x,y-1) != 0:
-        uhitbox = True
-        return uhitbox
-    # up 2
-    elif pyxel.pget(x+1,y-1) != 0:
-        uhitbox = True
-        return uhitbox
-    # up 3
-    elif pyxel.pget(x+2,y-1) != 0:
-        uhitbox = True
-        return uhitbox 
-    # up 4
-    elif pyxel.pget(x+3,y-1) != 0:
-        uhitbox = True
-        return uhitbox    
-    # up 5
-    elif pyxel.pget(x+4,y-1) != 0:
-        uhitbox = True
-        return uhitbox
-    # up 6
-    elif pyxel.pget(x+5,y-1) != 0:
-        uhitbox = True
-        return uhitbox
-    else:
-         uhitbox = False
-         return uhitbox
+    # up 
+    for i in range(0,6):
+        if pyxel.pget(x+i,y-1) != 0:
+            uhitbox = True
+            return uhitbox
+        else:
+            uhitbox = False
 
-    # dn 1
-    if pyxel.pget(x,y+13) != 0:
-        dhitbox = True
-        return dhitbox
-    # dn 2
-    if pyxel.pget(x+1,y+13) != 0:
-        dhitbox = True
-        return dhitbox
-    # dn 3
-    if pyxel.pget(x+2,y+13) != 0:
-        dhitbox = True
-        return dhitbox
-    # dn 4
-    if pyxel.pget(x+3,y+13) != 0:
-        dhitbox = True
-        return dhitbox
-    # dn 5
-    if pyxel.pget(x+4,y+13) != 0:
-        dhitbox = True
-        return dhitbox
-    # dn 6
-    if pyxel.pget(x+5,y+13) != 0:
-        dhitbox = True
-        return dhitbox
+    # dn 
+    for i in range(0,6):
+        if pyxel.pget(x+i,y+12) != 0:
+            dhitbox = True
+            return dhitbox
+        else:
+            dhitbox = False
 
-    #left 1
-    if pyxel.pget(x-1,y) != 0:
-        lhitbox = True
-        return lhitbox
-    #left 2
-    if pyxel.pget(x-1,y+1) != 0:
-        lhitbox = True
-        return lhitbox
-    #left 3
-    if pyxel.pget(x-1,y+2) != 0:
-        lhitbox = True
-        return lhitbox
-    #left 4
-    if pyxel.pget(x-1,y+3) != 0:
-        lhitbox = True
-        return lhitbox
-    #left 5
-    if pyxel.pget(x-1,y+4) != 0:
-        lhitbox = True
-        return lhitbox
-    #left 6
-    if pyxel.pget(x-1,y+5) != 0:
-        lhitbox = True
-        return lhitbox
-    #left 7
-    if pyxel.pget(x-1,y+6) != 0:
-        lhitbox = True
-        return lhitbox
-    #left 8
-    if pyxel.pget(x-1,y+7) != 0:
-        lhitbox = True
-        return lhitbox
-    #left 9
-    if pyxel.pget(x-1,y+8) != 0:
-        lhitbox = True
-        return lhitbox
-    #left 10
-    if pyxel.pget(x-1,y+9) != 0:
-        lhitbox = True
-        return lhitbox
-    #left 11
-    if pyxel.pget(x-1,y+10) != 0:
-        lhitbox = True
-        return lhitbox
-    #left 12
-    if pyxel.pget(x-1,y+11) != 0:
-        lhitbox = True
-        return lhitbox
+    #right 
+    for i in range(0,12):
+        if pyxel.pget(x+6,y+i) != 0:
+            rhitbox = True
+            return rhitbox
+        else:
+            rhitbox = False
+    
+    #left
+    for i in range(0,12):
+        if pyxel.pget(x-1,y+i) != 0:
+            lhitbox = True
+            return lhitbox
+        else:
+            lhitbox = False
 
-    #right 1
-    if pyxel.pget(x+7,y) != 0:
-        rhitbox = True
-        return rhitbox
-    #right 2
-    if pyxel.pget(x+7,y+1) != 0:
-        rhitbox = True
-        return rhitbox
-    #right 3
-    if pyxel.pget(x+7,y+2) != 0:
-        rhitbox = True
-        return rhitbox
-    #right 4
-    if pyxel.pget(x+7,y+3) != 0:
-        rhitbox = True
-        return rhitbox
-    #right 5
-    if pyxel.pget(x+7,y+4) != 0:
-        rhitbox = True
-        return rhitbox
-    #right 6    
-    if pyxel.pget(x+7,y+5) != 0:
-        rhitbox = True
-        return rhitbox
-    #right 7
-    if pyxel.pget(x+7,y+6) != 0:
-        rhitbox = True
-        return rhitbox
-    #right 8
-    if pyxel.pget(x+7,y+7) != 0:
-        rhitbox = True
-        return rhitbox
-    #right 9
-    if pyxel.pget(x+7,y+8) != 0:
-        rhitbox = True
-        return rhitbox
-    #right 10
-    if pyxel.pget(x+7,y+9) != 0:
-        rhitbox = True
-        return rhitbox
-    #right 11
-    if pyxel.pget(x+7,y+10) != 0:
-        rhitbox = True
-        return rhitbox
-    #right 12
-    if pyxel.pget(x+7,y+11) != 0:
-        rhitbox = True
-        return rhitbox
 
+def spikes_dat(x,y):
+    global level, dead
+    # coordinates in the list are tile positions (8x8 pixels)
+    tiles = []
+    if level == 1:
+        tiles = [(3,5), (3,6), (3,7), (3,8), (3,9), (3,10), (3,11), (3,12), (3,13), (3,14), (3,15), (3,16), (3,17), (3,18),(3,19), (3,20), (3,21), (3,22), (3,23), (8,5), (8,6), (8,7), (8,8), (8,9), (8,10), (8,11), (8,12), (8,13), (8,14), (8,15), (9,4), (10,4), (11,4), (18,14), (18,15), (18,16), (18,17), (18,18), (18,19), (19,13), (20,13), (21,13), (23,13), (23,3), (23,4), (23,5), (23,6), (25,0), (25,1), (25,2), (25,3), (25,4), (25,5), (25,6), (30,9), (30,10), (30,11), (30,12), (30,13), (30,14), (30,15), (30,16), (30,17), (30,18), (30,19), (30,20)]
+    
+    # helper converting a pixel coordinate to tile coordinate
+    def to_tile(px, py):
+        return px // 8, py // 8
+
+    #up
+    for i in range(0,6):
+        if to_tile(x+i, y-1) in tiles:
+            dead = True
+            return dead
+    #dn
+    for i in range(0,6):
+        if to_tile(x+i, y+12) in tiles:
+            dead = True
+            return dead
+    #right
+    for i in range(0,12):
+        if to_tile(x+6, y+i) in tiles:
+            dead = True
+            return dead
+    #left
+    for i in range(0,12):
+        if to_tile(x-1, y+i) in tiles:
+            dead = True
+            return dead
+    
+    return False
+        
+def death_lol():
+    if dead == True:
+        x = 0
+        y = 20
+        return x,y
 
 def update():
-    global x,y,vy,alt_init,wallside,climbing
-    print(x,y)
+    global x,y,vy,alt_init,wallside,climbing,rhitbox,lhitbox,uhitbox,dhitbox, level, dead, invulnerability_timer
+    
+    # Check for death and reset position
+    if dead == True:
+        x = 0
+        y = 20
+        dead = False
+        invulnerability_timer = 30  # 30 frames of invulnerability
+    
+    # Decrease invulnerability timer
+    if invulnerability_timer > 0:
+        invulnerability_timer -= 1
+    
+    hitbox(x, y)
+    # Only check spikes if not invulnerable
+    if invulnerability_timer == 0:
+        spikes_dat(x, y)
 
-    if pyxel.btn(pyxel.KEY_D) == True and pyxel.pget(x+7, y+10) == 0:
+
+    if pyxel.btn(pyxel.KEY_D) == True and pyxel.pget(x+7, y+10) == 0 and rhitbox == False:
         if x < 320   :
             x = x + 2
-    if pyxel.btn(pyxel.KEY_Q) == True and pyxel.pget(x-1, y+10) == 0:
+    if pyxel.btn(pyxel.KEY_Q) == True and pyxel.pget(x-1, y+10) == 0 and lhitbox == False:
         if x > 0 and pyxel.pget(x-1,y) == 0 :
             x = x - 2    
-
-    if pyxel.pget(x,y+13) == 0:
+    # Gravity
+    if dhitbox == False :
         vy += 0.5
-    if pyxel.pget(x,y+13) != 0:
+    else:
         vy = 0
 
-    if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.KEY_Z) and pyxel.pget(x,y+13) != 0:
+    # Jumping
+    if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.KEY_Z) and dhitbox == True:
+        vy = -4
         alt_init = y
-        if y - alt_init < 20 and pyxel.pget(x,y+13) != 0:
-            vy = -5
-        if y - alt_init > 20 or pyxel.pget(x,y-1) != 0:
-            vy = 0
+
+    if vy < 0 and (y - alt_init >= 20 or uhitbox):
+        vy = 0
+
     if y > 320:
         vy = 0
         x = 0 
@@ -201,16 +143,38 @@ def update():
         climbing = False
 
 
-    
+
+
+
+
 
     y += vy
 
+    if dhitbox and vy > 0:
+        while dhitbox:
+            y -= 1
+            hitbox(x, y)
+    if uhitbox and vy < 0:
+        while uhitbox:
+            y += 1
+            hitbox(x, y)
+
+def levels():
+    if level == 1:
+        pyxel.bltm(0, 0, 0, 0, 0, 320, 184, 0)
+    if level == 2:
+        pyxel.bltm(0, 0, 0, 0, 184, 320, 184, 0)
+
+def level_change():
+    global level
+    if x > 310 and y > 170:
+        level = 2
     
 def draw():
     global x,y
     pyxel.cls(0)
     pyxel.rect(x,y,6,12,2)
-    pyxel.bltm(0, 0, 0, 0, 0, 320, 184, 0)
+    levels()
 
 
 
