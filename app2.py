@@ -277,12 +277,8 @@ def update():
     level_change()
     dev_bypass()
     movements()
-    print("RH:", rhitbox, ", LH:", lhitbox, ", UH:", uhitbox, ", DH:", dhitbox)
 
     # Movements in "update" function for historical reasons
-    
-    print(x,y)
-    print(level)
 
 
 
