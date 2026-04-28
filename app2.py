@@ -25,7 +25,7 @@ def hitbox (x,y): # This function checks the hitbox of the player
             for i in range(0,11*scale_multiplier):
                 if pyxel.pget(x+i,y-1) != 0:
                     uhitbox = True
-                    return uhitbox
+                    break
                 else:
                     uhitbox = False
 
@@ -33,7 +33,7 @@ def hitbox (x,y): # This function checks the hitbox of the player
             for i in range(0,11*scale_multiplier):
                 if pyxel.pget(x+i,y+17) != 0:
                     dhitbox = True
-                    return dhitbox
+                    break
                 else:
                     dhitbox = False
 
@@ -41,7 +41,7 @@ def hitbox (x,y): # This function checks the hitbox of the player
             for i in range(0,16*scale_multiplier):
                 if pyxel.pget(x+12,y+i) != 0:
                     rhitbox = True
-                    return rhitbox
+                    break
                 else:
                     rhitbox = False
         
@@ -49,14 +49,14 @@ def hitbox (x,y): # This function checks the hitbox of the player
             for i in range(0,16*scale_multiplier):
                 if pyxel.pget(x-1,y+i) != 0:
                     lhitbox = True
-                    return lhitbox
+                    break
                 else:
                     lhitbox = False
         if player_size == 1:
             for i in range(0,2*scale_multiplier):
                 if pyxel.pget(x+i,y-1) != 0:
                     uhitbox = True
-                    return uhitbox
+                    break
                 else:
                     uhitbox = False
 
@@ -64,7 +64,7 @@ def hitbox (x,y): # This function checks the hitbox of the player
             for i in range(0,2*scale_multiplier):
                 if pyxel.pget(x+i,y+6) != 0:
                     dhitbox = True
-                    return dhitbox
+                    break
                 else:
                     dhitbox = False
 
@@ -72,14 +72,14 @@ def hitbox (x,y): # This function checks the hitbox of the player
             for i in range(0,5*scale_multiplier):
                 if pyxel.pget(x+2,y+i) != 0:
                     rhitbox = True
-                    return rhitbox
+                    break
                 else:
                     rhitbox = False
         
             for i in range(0,5*scale_multiplier):
                 if pyxel.pget(x-1,y+i) != 0:
                     lhitbox = True
-                    return lhitbox
+                    break
                 else:
                     lhitbox = False
 
@@ -289,7 +289,8 @@ def levels():
     if level == 2:
         return pyxel.bltm(0, 0, 0, 384, 0, 320, 184, 0)
     if level == 3:
-        return pyxel.bltm(0, 0, 0, 88*scale, 0, 320, 184, 0)
+        return level = 4
+        # return pyxel.bltm(0, 0, 0, 88*scale, 0, 320, 184, 0)
     if level == 4:
         end_game()
         return
